@@ -1,4 +1,4 @@
-# cpptester
+# Castorno
 
 A simple C++98 testing framework library, mainly designed to fit my testing needs.
 

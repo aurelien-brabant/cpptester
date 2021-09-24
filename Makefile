@@ -1,6 +1,6 @@
 SRCS	:= Tester.cpp Timer.cpp
 HEADERS	:= Tester.hpp Timer.hpp assert.hpp
-TARGET	:= libcpptester.a
+TARGET	:= libcastorno.a
 
 CC			:= clang++
 CPP_FLAGS	:= -Wall -Wextra -Werror
