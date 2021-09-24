@@ -13,8 +13,19 @@ if (!(actual == expected)) {					\
 
 # define p_assert_eq(arg1, arg2)				\
 if (!(arg1 == arg2)) {							\
-	tester.error << (arg1) << " != " << (arg2);		\
+	tester.error << (arg1) << " != " << (arg2);	\
 	return 1;									\
+}
+
+# define assert_throw(ExceptionType, expr)	\
+try {										\
+	expr;									\
+	tester.error << "Expected expression to throw, but didn't";	\
+	return 1;								\
+} catch (ExceptionType & e) {				\
+} catch (std::exception & e) {				\
+	tester.error << "Caught exception, but not of right type";	\
+	return 1;								\
 }
 
 //////////////////////////////////////////////
