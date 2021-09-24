@@ -3,6 +3,7 @@
 # include <string>
 # include <map>
 # include <vector>
+# include <sstream>
 
 class Tester
 {
@@ -20,8 +21,8 @@ class Tester
 		typedef std::map<std::string, std::vector<Test> > TestSuiteMap;
 
 	private:
-		TestSuiteMap	_testSuites;
-		std::string		_error;
+		static const size_t	errorBufsize = 100;
+		TestSuiteMap		_testSuites;
 
 		std::string _consumeError(void);
 
@@ -34,7 +35,7 @@ class Tester
 		void registerTest(const std::string & suiteName, const std::string &testName, TestFn fn);
 		void runAllSuites(void);
 		
-		void setError(const std::string & msg);
+		std::ostringstream	error;
 };
 
 #endif

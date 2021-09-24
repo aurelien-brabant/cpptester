@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <cstdio>
 #include "Tester.hpp"
 #include "Timer.hpp"
 
@@ -12,29 +13,20 @@ Tester::Tester(void)
 {
 }
 
-Tester::Tester(const Tester & rhs)
-{
-	*this = rhs;
-}
+Tester::Tester(const Tester & rhs) { *this = rhs; } Tester & Tester::operator=(const Tester & rhs) {
 
-Tester & Tester::operator=(const Tester & rhs)
-{
 	if (this == &rhs) {
 	}
 
 	return *this;
 }
 
-void Tester::setError(string const & msg)
-{
-	_error = msg;
-}
-
 string Tester::_consumeError(void)
 {
-	string s(_error);
+	string s(error.str());
 
-	_error = "";
+	error.str("");
+	error.clear();
 
 	return s;
 }
@@ -70,25 +62,25 @@ void Tester::runAllSuites(void)
 			testTimer.start();
 			int ret = vcit->fn(*this);
 			testTimer.finish();
-			
+
 			cout << "[" << (ret ? "\033[0;31mX" : "\033[0;32m✔") << "\033[0m] " <<
-			std::left << setw(40) << (string("\033[0;30m") + vcit->name + "\033[0m");
+				std::left << setw(40) << (string("\033[0;30m") + vcit->name + "\033[0m");
 
 			passedN += (ret == 0);
-			
+
 			cout << "\033[1;35m" << setw(8) << testTimer.getElapsed() << "\033[0m ms";
 
-			if (ret && !_error.empty()) {
+			if (ret && !error.str().empty()) {
 				cout << " (\033[0;31m" << _consumeError() << "\033[0m)";
 			}
-			
+
 			cout << "\n";
 		}
 
 		if (passedN == cit->second.size()) {
 			++suitePassedN;
 		}
-		
+
 		cout << "\n\033[1;33mSUITE SUMMARY: \033[0m" << passedN << "/" << cit->second.size() << " passed.\n\n";
 	}
 

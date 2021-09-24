@@ -9,6 +9,7 @@ Timer::Timer(void)
 
 Timer::Timer(const Timer & rhs)
 {
+	*this = rhs;
 }
 
 Timer & Timer::operator=(const Timer & rhs)

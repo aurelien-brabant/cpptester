@@ -1,1 +1,3 @@
+*.o
+libcpptester.a
 a.out
