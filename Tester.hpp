@@ -7,19 +7,23 @@
 class Tester
 {
 	public:
-		typedef int (*TestFn)(void);
+		typedef int (*TestFn)(Tester &);
 
 		struct Test
 		{
-			std::string name;
-			TestFn fn;
+			std::string	name;
+			TestFn		fn;
 			
 			Test(std::string const & name, TestFn fn): name(name), fn(fn) {};
 		};
+
 		typedef std::map<std::string, std::vector<Test> > TestSuiteMap;
 
 	private:
-		TestSuiteMap _testSuites;
+		TestSuiteMap	_testSuites;
+		std::string		_error;
+
+		std::string _consumeError(void);
 
 	public:
 		Tester(void);
@@ -29,6 +33,8 @@ class Tester
 
 		void registerTest(const std::string & suiteName, const std::string &testName, TestFn fn);
 		void runAllSuites(void);
+		
+		void setError(const std::string & msg);
 };
 
 #endif
