@@ -13,7 +13,7 @@ if (!(actual == expected)) {					\
 
 # define p_assert_eq(arg1, arg2)				\
 if (!(arg1 == arg2)) {							\
-	tester.error << arg1 << " != " << arg2;		\
+	tester.error << (arg1) << " != " << (arg2);		\
 	return 1;									\
 }
 
