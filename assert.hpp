@@ -52,12 +52,13 @@ int range_eq(Tester& tester, Iterator actual_begin, Iterator actual_end, Iterato
 		return actual_end - actual_begin > expected_end - expected_begin ? 1 : -1;
 	}
 
-	if (*actual_begin != *expected_begin) {
-		tester.error << "Ranges differ at element " << actual_end - actual_begin;
-		return *actual_begin - *expected_begin;
+	while (actual_begin != actual_end) {
+		if (*actual_begin != *expected_begin) {
+			tester.error << "Ranges differ at element " << actual_end - actual_begin;
+			return *actual_begin - *expected_begin;
+		}
+		++actual_begin; ++expected_begin;
 	}
-
-	++actual_begin; ++expected_begin;
 
 	return 0;
 }
