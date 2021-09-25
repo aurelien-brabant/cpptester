@@ -6,6 +6,18 @@
 // EQUALITY CHECK
 /////////////////////////////////////////////
 
+# define assert_expr(expr)                     \
+if (!(expr)) {                                 \
+	tester.error << #expr " is false";         \
+	return 1;                                  \
+}
+
+# define assert_expr_not(expr)                 \
+if ((expr)) {                                 \
+	tester.error << #expr " is true";          \
+	return 1;                                  \
+}
+
 # define assert_eq(actual, expected)			\
 if (!(actual == expected)) {					\
 	tester.error << "actual != expected";		\
