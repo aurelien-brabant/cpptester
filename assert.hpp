@@ -20,7 +20,7 @@ if ((expr)) {                                  \
 
 # define assert_eq(actual, expected)			\
 if (!((actual) == (expected))) {				\
-	tester.error << # actual " != " # expected  \
+	tester.error << # actual " != " # expected; \
 	return 1;                                   \
 }
 
