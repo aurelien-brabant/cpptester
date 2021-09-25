@@ -13,14 +13,15 @@ if (!(expr)) {                                 \
 }
 
 # define assert_expr_not(expr)                 \
-if ((expr)) {                                 \
+if ((expr)) {                                  \
 	tester.error << #expr " is true";          \
 	return 1;                                  \
 }
 
 # define assert_eq(actual, expected)			\
-if (!(actual == expected)) {					\
-	tester.error << "actual != expected";		\
+if (!((actual) == (expected))) {				\
+	tester.error << # actual " != " # expected  \
+	return 1;                                   \
 }
 
 # define p_assert_eq(arg1, arg2)				\
