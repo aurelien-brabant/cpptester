@@ -56,6 +56,7 @@ void Tester::runAllSuites(void)
 {
 	size_t suitePassedN = 0;
 	std::ofstream timeDumpOfs((std::string("./.castorno/") + _progName + ".time.txt").c_str());
+	std::ofstream testListOfs("./.castorno/tests.txt");
 
 	if (!timeDumpOfs) {
 		throw std::runtime_error("Could not create time dump file");
@@ -67,6 +68,7 @@ void Tester::runAllSuites(void)
 		/* For each test */
 		size_t passedN = 0;
 		for (std::vector<Test>::const_iterator vcit = cit->second.begin(); vcit != cit->second.end(); ++vcit) {
+			testListOfs << vcit->name << "\n";
 
 			Timer testTimer;
 
