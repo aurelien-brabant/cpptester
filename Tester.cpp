@@ -1,16 +1,22 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdio>
+#include <fstream>
+#include <sys/stat.h>
+#include <sys/errno.h>
+#include <stdexcept>
 #include "Tester.hpp"
 #include "Timer.hpp"
 
 using std::cout;
 using std::string;
 using std::setw;
-using std::right;
 
-Tester::Tester(void)
+Tester::Tester(const std::string& progName): _progName(progName)
 {
+	if (mkdir("./.castorno", 0777) && errno != EEXIST) {
+		throw std::runtime_error("Could not create log directory");
+	}
 }
 
 Tester::Tester(const Tester & rhs) { *this = rhs; } Tester & Tester::operator=(const Tester & rhs) {
@@ -49,6 +55,11 @@ void Tester::registerTest(string const & suiteName, const string & testName, Tes
 void Tester::runAllSuites(void)
 {
 	size_t suitePassedN = 0;
+	std::ofstream timeDumpOfs((std::string("./.castorno/") + _progName + ".time.txt").c_str());
+
+	if (!timeDumpOfs) {
+		throw std::runtime_error("Could not create time dump file");
+	}
 
 	for (TestSuiteMap::const_iterator cit = _testSuites.begin(); cit != _testSuites.end(); ++cit) {
 		cout << "\033[1;30m>>>>>>>>>> \033[0;36m" << cit->first << " \033[1;30m<<<<<<<<<<\033[0m\n\n";
@@ -68,7 +79,9 @@ void Tester::runAllSuites(void)
 
 			passedN += (ret == 0);
 
-			cout << "\033[1;35m" << setw(8) << testTimer.getElapsed() << "\033[0m ms";
+			double elapsed = testTimer.getElapsed();
+			cout << "\033[1;35m" << setw(8) << elapsed << "\033[0m ms";
+			timeDumpOfs << elapsed << "\n";
 
 			if (ret && !error.str().empty()) {
 				cout << " (\033[0;31m" << _consumeError() << "\033[0m)";
