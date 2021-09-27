@@ -5,6 +5,8 @@
 
 Timer::Timer(void)
 {
+	clock_gettime(CLOCK_MONOTONIC, &_st);
+	_ft = _st;
 }
 
 Timer::Timer(const Timer & rhs)
@@ -34,9 +36,9 @@ void Timer::finish(void)
 
 double Timer::getElapsed(void)
 {
-	double elapsed = _ft.tv_sec - _st.tv_sec;
+	double elapsed = (_ft.tv_sec - _st.tv_sec) * 1e+3; /* seconds in ms */
 
-	elapsed += (_ft.tv_nsec - _st.tv_nsec) / 1e+6;
+	elapsed += (_ft.tv_nsec - _st.tv_nsec) / 1e+6; /* nanoseconds in ms */
 
 	return elapsed;
 }
