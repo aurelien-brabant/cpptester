@@ -46,31 +46,31 @@ try {										\
 /////////////////////////////////////////////
 
 template <class Iterator>
-int range_eq(Tester& tester, Iterator actual_begin, Iterator actual_end, Iterator expected_begin, Iterator expected_end)
+bool range_eq(Tester& tester, Iterator actual_begin, Iterator actual_end, Iterator expected_begin, Iterator expected_end)
 {
 	if (actual_end - actual_begin != expected_end - expected_begin) {
 		tester.error << "Ranges aren't of the same size";
-		return actual_end - actual_begin > expected_end - expected_begin ? 1 : -1;
+		return false;
 	}
 
 	while (actual_begin != actual_end) {
 		if (*actual_begin != *expected_begin) {
 			tester.error << "Ranges differ at element " << actual_end - actual_begin;
-			return *actual_begin - *expected_begin;
+			return false;
 		}
 		++actual_begin; ++expected_begin;
 	}
 
-	return 0;
+	return true;
 }
 
 # define assert_range_eq(actual_begin, actual_end, expected_begin, expected_end)			\
-if (range_eq(tester, actual_begin, actual_end, expected_begin, expected_end) != 0) {		\
+if (!range_eq(tester, actual_begin, actual_end, expected_begin, expected_end)) {		\
 	return 1;																				\
 }
 
 # define assert_range_uneq(actual_begin, actual_end, expected_begin, expected_end)			\
-if (range_eq(tester, actual_begin, actual_end, expected_begin, expected_end) == 0) {		\
+if (range_eq(tester, actual_begin, actual_end, expected_begin, expected_end)) {		\
 	tester.error << "Ranges are equal";														\
 	return 1;																				\
 }
