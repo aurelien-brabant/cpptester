@@ -23,11 +23,12 @@ class Tester
 	private:
 		static const size_t	errorBufsize = 100;
 		TestSuiteMap		_testSuites;
+		std::string			_progName;
 
 		std::string _consumeError(void);
 
 	public:
-		Tester(void);
+		Tester(const std::string& progName);
 		Tester(const Tester & rhs);
 
 		Tester & operator=(const Tester & rhs);

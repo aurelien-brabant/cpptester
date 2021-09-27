@@ -2,3 +2,5 @@
 lib*.a
 a.out
 *.swp
+.castorno
+castorno

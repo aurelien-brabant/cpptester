@@ -24,9 +24,9 @@ int testRanges(Tester& tester)
 	return 0;
 }
 
-int main(void)
+int main(int argc, char **av)
 {
-	Tester tester;
+	Tester tester(*av);
 
 	tester.registerTest("main tests", "test a successful one", &test1);
 	tester.registerTest("main tests", "test a failing one", &test2);
