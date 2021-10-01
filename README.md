@@ -75,26 +75,36 @@ All tests suites have been processed! 1/2 were successfull.
 
 Here are all the macros you can make use of to validate tests:
 
-- ```assert_eq(arg1, arg2)```
+```
+assert_eq(arg1, arg2);
+```
 
 Ensure that arg1 == arg2. An overload of the `==` operator that compares arg1's type
 to arg2's type must of course exist.
 
-```p_assert_eq(arg1, arg2)```
+```
+p_assert_eq(arg1, arg2)
+```
 
 Same thing than `assert_eq`, but print on the standard output the two elements in case
 they compared unequal. This macro requires that an overload of `<<` exists for arg1 and arg2, where the lhs is of type `std::ostream` and `rhs` of arg's type.
 
-```assert_range_eq(actual_begin, actual_end, expected_begin, expected_end)```
+```
+assert_range_eq(actual_begin, actual_end, expected_begin, expected_end)
+```
 
 Given valid iterator ranges, ensure that each element in the actual range compares equal to each element in the
 expected range. `actual_begin::value_type` should be comparable to `expected_begin::value_type`.
 
-```assert_range_uneq(actual_begin, actual_end, expected_begin, expected_end)```
+```
+assert_range_uneq(actual_begin, actual_end, expected_begin, expected_end)
+```
 
 Ensure that ranges are NOT equal. Same requirements than `assert_range_eq`.
 
-```assert_throw(ExceptionType, expr)```
+```
+assert_throw(ExceptionType, expr)
+```
 
 Ensures that the provided `expr` throws an exception of type `ExceptionType`. The test fails if no exception is
 thrown, or if an exception which is not of the specified type is thrown instead of the expected one.
@@ -111,10 +121,14 @@ assert_throw(std::out_of_range, v.at(2)); // should throw
 /* ... */
 ```
 
-```assert_expr(expr)```
+```
+assert_expr(expr)
+```
 
 Evaluates the given expression, marking the test as successful or failed depending on whether it's true or false.
 
-```assert_expr_not```
+```
+assert_expr_not
+```
 
 Basically `assert_expr(!(expr))`.

@@ -1,39 +1,31 @@
 #include "Tester.hpp"
 #include "assert.hpp"
-#include <stdexcept>
 
-int test1(Tester & tester)
+/**
+ * NOTE: a test function should IMPERATIVELY take a Tester& parameter
+ * named tester (for use with the assertion API) and should also return 0
+ * in at least one execution path to indicate success case
+ */
+
+/* 1 != 2, thus will fail */
+int test1(Tester& tester) { p_assert_eq(1, 2); return 0; } 
+
+/* 1 == 1, thus will succeed */
+int test2(Tester& tester) { p_assert_eq(1, 1); return 0; } 
+
+/* The expression evaluates to true, thus will succeed */
+int test3(Tester& tester) { assert_expr(1 == 1 && 2 > 1); return 0; } 
+
+int main(int ac, char **av)
 {
-	return 0;
-}
+	Tester tester(*av); // program's name, but can be any string
 
-int test2(Tester & tester)
-{
-	p_assert_eq(3, 4);
+	/* register tests: each test is bound to a test suite */
+	tester.registerTest("test suite 1", "failing test", test1);
+	tester.registerTest("test suite 1", "successful test", test2);
+	tester.registerTest("test suite 2", "successful test", test3);
 
-	return 0;
-}
-
-int testRanges(Tester& tester)
-{
-	std::vector<int> v1(10, 42);
-	std::vector<int> v2(10, 42);
-
-	assert_throw(std::runtime_error, v2.at(22));
-
-	return 0;
-}
-
-int main(int argc, char **av)
-{
-	Tester tester(*av);
-
-	tester.registerTest("main tests", "test a successful one", &test1);
-	tester.registerTest("main tests", "test a failing one", &test2);
-
-	tester.registerTest("other test suite", "vector resize", &test1);
-	tester.registerTest("other test suite", "compare vector ranges", &testRanges);
-
+	/* run all the registered tests and output the results */
 	tester.runAllSuites();
 
 	return 0;
