@@ -67,7 +67,7 @@ size_t Tester::_getMaxTestNameLength(void)
 	return greatestLength;
 }
 
-void Tester::runAllSuites(void)
+bool Tester::runAllSuites(void)
 {
 	size_t suitePassedN = 0;
 	std::ofstream timeDumpOfs((std::string("./.castorno/") + _progName + ".time.txt").c_str());
@@ -116,4 +116,6 @@ void Tester::runAllSuites(void)
 	}
 
 	cout << "All tests suites have been processed! " << suitePassedN << "/" << _testSuites.size() << " were successful.\n";
+
+	return suitePassedN == _testSuites.size();
 }

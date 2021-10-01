@@ -35,7 +35,7 @@ class Tester
 		Tester & operator=(const Tester & rhs);
 
 		void registerTest(const std::string & suiteName, const std::string &testName, TestFn fn);
-		void runAllSuites(void);
+		bool runAllSuites(void);
 		
 		std::ostringstream	error;
 };
