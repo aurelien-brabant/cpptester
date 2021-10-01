@@ -1,9 +1,9 @@
-SRCS	:= Tester.cpp Timer.cpp
+SRCS	:= $(addprefix src/, Tester.cpp Timer.cpp)
 HEADERS	:= Tester.hpp Timer.hpp assert.hpp
 TARGET	:= libcastorno.a
 
 CC			:= clang++
-CPP_FLAGS	:= -Wall -Wextra -Werror
+CPP_FLAGS	:= -Wall -Wextra -Werror -Iinclude
 
 OBJS		:=  $(SRCS:%.cpp=%.o)
 

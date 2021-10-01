@@ -1,5 +1,5 @@
 #include <ctime>
-#include "Timer.hpp"
+#include "castorno/Timer.hpp"
 
 /* Inspired from https://stackoverflow.com/questions/2962785/c-using-clock-to-measure-time-in-multi-threaded-programs/2962914#2962914 */
 
