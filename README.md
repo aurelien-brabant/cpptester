@@ -18,8 +18,8 @@ Because I often want to keep things separated, I decided to develop it as a libr
 Here is what you need to begin using Castorno:
 
 ```cpp
-#include "Tester.hpp"
-#include "assert.hpp"
+#include "castorno/Tester.hpp"
+#include "castorno/assert.hpp"
 
 /**
  * NOTE: a test function should IMPERATIVELY take a Tester& parameter
@@ -52,7 +52,13 @@ int main(int ac, char **av)
 }
 ```
 
-Which should give the following (colored) output:
+Compile the program like so (assuming Castorno has been cloned in the current working directory):
+
+```shell
+gcc -L. -lcastorno -Icastorno/include main.cpp -o test
+```
+
+Executing `test` should give you the following (colored) output:
 
 ```
 >>>>>>>>>> test suite 1 <<<<<<<<<<
