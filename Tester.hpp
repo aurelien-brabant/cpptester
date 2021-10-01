@@ -26,6 +26,7 @@ class Tester
 		std::string			_progName;
 
 		std::string _consumeError(void);
+		size_t _getMaxTestNameLength(void);
 
 	public:
 		Tester(const std::string& progName);

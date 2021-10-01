@@ -52,11 +52,27 @@ void Tester::registerTest(string const & suiteName, const string & testName, Tes
 	}
 }
 
+size_t Tester::_getMaxTestNameLength(void)
+{
+	size_t greatestLength = 0;
+
+	for (TestSuiteMap::const_iterator cit = _testSuites.begin(); cit != _testSuites.end(); ++cit) {
+		for (std::vector<Test>::const_iterator citb = cit->second.begin(); citb != cit->second.end(); ++citb) {
+			if (citb->name.size() > greatestLength) {
+				greatestLength = citb->name.size();
+			}
+		}
+	}
+
+	return greatestLength;
+}
+
 void Tester::runAllSuites(void)
 {
 	size_t suitePassedN = 0;
 	std::ofstream timeDumpOfs((std::string("./.castorno/") + _progName + ".time.txt").c_str());
 	std::ofstream testListOfs("./.castorno/tests.txt");
+	const size_t offset = _getMaxTestNameLength() + 1;
 
 	if (!timeDumpOfs) {
 		throw std::runtime_error("Could not create time dump file");
@@ -77,7 +93,7 @@ void Tester::runAllSuites(void)
 			testTimer.finish();
 
 			cout << "[" << (ret ? "\033[0;31mX" : "\033[0;32m✔") << "\033[0m] " <<
-				std::left << setw(40) << (string("\033[0;30m") + vcit->name + "\033[0m");
+				std::left << setw(offset) << (string("\033[0;30m") + vcit->name + "\033[0m");
 
 			passedN += (ret == 0);
 
