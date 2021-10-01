@@ -74,6 +74,8 @@ void Tester::runAllSuites(void)
 	std::ofstream testListOfs("./.castorno/tests.txt");
 	const size_t offset = _getMaxTestNameLength() + 1;
 
+	std::cout << "Offset of " << offset << "\n";
+
 	if (!timeDumpOfs) {
 		throw std::runtime_error("Could not create time dump file");
 	}
@@ -93,7 +95,7 @@ void Tester::runAllSuites(void)
 			testTimer.finish();
 
 			cout << "[" << (ret ? "\033[0;31mX" : "\033[0;32m✔") << "\033[0m] " <<
-				std::left << setw(offset) << (string("\033[0;30m") + vcit->name + "\033[0m");
+				std::left << setw(offset + 17) << (string("\033[0;30m") + vcit->name + "\033[0m");
 
 			passedN += (ret == 0);
 
