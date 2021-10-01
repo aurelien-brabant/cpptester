@@ -10,7 +10,7 @@ A simple C++98 testing framework library, designed with simplicity in mind.
 
 ## Motivations
 
-I originally decided to build this library to fit my testing needs for one of my school assignments: the [ft_containers](https://github.com/aurelien-brabant/ft-containers) project.
+I originally decided to build this library to fit my testing needs for one of my school assignments: the [ft_containers](https://github.com/aurelien-brabant/ft_containers) project.
 Because I often want to keep things separated, I decided to develop it as a library instead of integrating it directly in my project.
 
 ## Getting started
