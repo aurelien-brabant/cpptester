@@ -12,17 +12,19 @@ RM			:= rm -rf
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	ar rcs $(TARGET) $(OBJS)
+	@ar rcs $(TARGET) $(OBJS)
+	@printf "LD\t$(TARGET)\n"
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(TARGET)
+	@$(RM) $(TARGET)
 
 re: fclean all
 
 .PHONY: clean fclean re all
 
 %.o: %.cpp
-	$(CC) $(CPP_FLAGS) -c $< -o $@
+	@$(CC) $(CPP_FLAGS) -c $< -o $@
+	@printf "CC\t$<\n"
