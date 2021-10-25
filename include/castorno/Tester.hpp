@@ -1,43 +1,50 @@
 #ifndef TESTER_HPP
-# define TESTER_HPP
-# include <string>
-# include <map>
-# include <vector>
-# include <sstream>
+#define TESTER_HPP
+#include <fstream>
+#include <map>
+#include <sstream>
+#include <string>
+#include <vector>
 
 class Tester
 {
-	public:
-		typedef int (*TestFn)(Tester &);
+  public:
+    typedef int (*TestFn)(Tester&);
 
-		struct Test
-		{
-			std::string	name;
-			TestFn		fn;
-			
-			Test(std::string const & name, TestFn fn): name(name), fn(fn) {};
-		};
+    struct Test
+    {
+        std::string name;
+        TestFn fn;
 
-		typedef std::map<std::string, std::vector<Test> > TestSuiteMap;
+        Test(std::string const& name, TestFn fn)
+          : name(name)
+          , fn(fn){};
+    };
 
-	private:
-		static const size_t	errorBufsize = 100;
-		TestSuiteMap		_testSuites;
-		std::string			_progName;
+    typedef std::map<std::string, std::vector<Test> > TestSuiteMap;
 
-		std::string _consumeError(void);
-		size_t _getMaxTestNameLength(void);
+  private:
+    static const size_t errorBufsize = 100;
+    TestSuiteMap _testSuites;
+    std::string _progName;
+    std::ofstream _timeDumpOfs, _testNameDumpOfs;
 
-	public:
-		Tester(const std::string& progName);
-		Tester(const Tester & rhs);
+    std::string _consumeError(void);
+    size_t _getMaxTestNameLength(void);
 
-		Tester & operator=(const Tester & rhs);
+  public:
+    Tester(const std::string& progName);
+    Tester(const Tester& rhs);
 
-		void registerTest(const std::string & suiteName, const std::string &testName, TestFn fn);
-		bool runAllSuites(void);
-		
-		std::ostringstream	error;
+    Tester& operator=(const Tester& rhs);
+
+    void registerTest(const std::string& suiteName,
+                      const std::string& testName,
+                      TestFn fn);
+    bool runAllSuites(void);
+    bool runSuite(const std::string& suiteName);
+
+    std::ostringstream error;
 };
 
 #endif
