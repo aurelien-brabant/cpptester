@@ -1,0 +1,34 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "src/Tester.o",
+      "src/Tester.cpp"
+    ],
+    "directory": "/home/aurelle/Prog/castorno",
+    "file": "/home/aurelle/Prog/castorno/src/Tester.cpp",
+    "output": "/home/aurelle/Prog/castorno/src/Tester.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "src/Timer.o",
+      "src/Timer.cpp"
+    ],
+    "directory": "/home/aurelle/Prog/castorno",
+    "file": "/home/aurelle/Prog/castorno/src/Timer.cpp",
+    "output": "/home/aurelle/Prog/castorno/src/Timer.o"
+  }
+]
