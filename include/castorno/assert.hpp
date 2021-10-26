@@ -6,6 +6,8 @@
 // EQUALITY CHECK
 /////////////////////////////////////////////
 
+#define TEST(test_name) int test_name(Tester& tester)
+
 #define assert_expr(expr)                                                      \
     if (!(expr)) {                                                             \
         tester.error << #expr " is false";                                     \
