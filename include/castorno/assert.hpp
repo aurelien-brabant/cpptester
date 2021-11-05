@@ -1,5 +1,4 @@
-#ifndef ASSERT_HPP
-#define ASSERT_HPP
+#pragma once
 #include <iostream>
 
 //////////////////////////////////////////////
@@ -90,5 +89,3 @@ range_eq(Tester& tester,
         tester.error << "Ranges are equal";                                    \
         return 1;                                                              \
     }
-
-#endif

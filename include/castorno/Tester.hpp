@@ -1,5 +1,4 @@
-#ifndef TESTER_HPP
-#define TESTER_HPP
+#pragma once
 #include <fstream>
 #include <map>
 #include <sstream>
@@ -46,5 +45,3 @@ class Tester
 
     std::ostringstream error;
 };
-
-#endif
